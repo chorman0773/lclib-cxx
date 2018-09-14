@@ -524,3 +524,14 @@ template<typename E> DataOutputStream& operator<<(E e); //(14)
 (11): Writes the Version as though by writeByte(v.getMajor()-1) and writeByte(v.getMinor())
 (14): Writes the enum value as though by the writeEnum method. This operator only participates in overload resolution if std::is_enum_v<E> is true.
 
+<h2>Fields</h2>
+
+```cpp
+const append_t append{}; //(1)
+const little_endian_t little_endian{}; //(2)
+const std::size_t EOF{-1}; //(3)
+```
+
+(1): Tag for FileOutputStream constuctors to disambugate the overloads that open the file in append mode instead of write mode.
+(2): Tag for DataOutputStream/DataInputStream constructors to disambugate overloads that write/read in little-endian byte order mode instead of Big-Endian byte order mode
+(3): Value returned from read() to indicate that the end-of-file was reached.
